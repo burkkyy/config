@@ -1,0 +1,20 @@
+# Alias definitions
+
+# Default aliases
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias nyx='nyx -c ~/.config/nyx/config/'
+
+# Ease of use aliases
+alias viu='ssh -l burkec csci.viu.ca'
+alias srm='sudo rm -r'
+alias vm='virt-manager'
+
+# Single letter aliases
+alias d='du_color'
+alias l='ls -alh'
+alias n='neofetch --config ~/.config/neofetch.conf'
+alias p='python3'
+alias r='ranger'
+alias v='nvim'
+

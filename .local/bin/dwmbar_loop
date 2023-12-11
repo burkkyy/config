@@ -1,0 +1,7 @@
+#!/bin/bash
+while :
+do
+	dwmbar_refresh
+	sleep 1m
+done
+

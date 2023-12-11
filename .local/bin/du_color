@@ -1,0 +1,16 @@
+#!/bin/bash
+
+du -hsc $(ls -A) | sort -h | while read size name; do
+    case $size in
+        *[kK]) size_color=32;;  # green
+        *[mM]) size_color=33;;  # yellow
+        *[gG]) size_color=31;;  # red
+        *[0-9]) size_color=34;;  # blue
+        *) size_color=0;;  # reset color
+    esac
+
+   [ -f ${name} ] && file_color=0 || file_color=34
+
+   echo -e "\e[${size_color}m${size}\e[0m\t\e[${file_color}m${name}\e[0m"
+done
+

@@ -1,0 +1,48 @@
+get_volume() { \
+	echo "🔊"
+	pactl get-sink-volume 0 | awk '{print $5}'
+}
+
+get_thermals() { \
+	echo ""
+	acpi -t | awk '{print $4}'
+	echo "糖"
+}
+
+get_battery() { \
+	echo "🔋"	
+	acpi | awk '{print $4}'
+}
+
+get_brightness() { \
+	echo "盛"
+	xrandr --verbose | awk '/Brightness/ {print $2 * 100; exit}'
+}
+
+get_mem() { \
+	echo "🧠"
+	free | grep Mem | awk '{ printf("%.4f%\n", $3/$2 * 100.0) }'
+}
+
+get_time() { \
+	echo "⏰"
+	date | awk '{print $4}'
+}
+
+get_date() { \
+	echo "📅"
+	date | awk '{printf("%s %s %s\n", $1, $2, $3)}'
+}
+
+status() { \
+	get_thermals
+	get_mem
+	get_brightness
+	get_volume
+	get_battery
+	get_date
+	get_time
+}
+
+xsetroot -name "$(status | tr '\n' ' ')"	
+

@@ -16,5 +16,6 @@ alias l='ls -alh'
 alias n='neofetch --config ~/.config/neofetch.conf'
 alias p='python3'
 alias r='ranger'
+alias t='tree'
 alias v='nvim'
 

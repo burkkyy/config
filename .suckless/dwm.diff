@@ -1,0 +1,73 @@
+diff --git a/drw.c b/drw.c
+index 4cdbcbe..c1c265c 100644
+--- a/drw.c
++++ b/drw.c
+@@ -133,19 +133,6 @@ xfont_create(Drw *drw, const char *fontname, FcPattern *fontpattern)
+ 		die("no font specified.");
+ 	}
+ 
+-	/* Do not allow using color fonts. This is a workaround for a BadLength
+-	 * error from Xft with color glyphs. Modelled on the Xterm workaround. See
+-	 * https://bugzilla.redhat.com/show_bug.cgi?id=1498269
+-	 * https://lists.suckless.org/dev/1701/30932.html
+-	 * https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=916349
+-	 * and lots more all over the internet.
+-	 */
+-	FcBool iscol;
+-	if(FcPatternGetBool(xfont->pattern, FC_COLOR, 0, &iscol) == FcResultMatch && iscol) {
+-		XftFontClose(drw->dpy, xfont);
+-		return NULL;
+-	}
+-
+ 	font = ecalloc(1, sizeof(Fnt));
+ 	font->xfont = xfont;
+ 	font->pattern = pattern;
+diff --git a/dwm.c b/dwm.c
+index 5e4d494..bc9b140 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -268,6 +268,7 @@ static Display *dpy;
+ static Drw *drw;
+ static Monitor *mons, *selmon;
+ static Window root, wmcheckwin;
++static int globalborder;
+ 
+ /* configuration, allows nested code to access above variables */
+ #include "config.h"
+@@ -1277,11 +1278,17 @@ void
+ resizeclient(Client *c, int x, int y, int w, int h)
+ {
+ 	XWindowChanges wc;
++	
++	if(c->isfloating || selmon->lt[selmon->sellt]->arrange == NULL ) { globalborder = 0 ; }
++	else {
++		if (selmon->lt[selmon->sellt]->arrange == monocle) { globalborder = 0 - borderpx ; }
++		else { globalborder = gappx ; }
++	}
+ 
+-	c->oldx = c->x; c->x = wc.x = x;
+-	c->oldy = c->y; c->y = wc.y = y;
+-	c->oldw = c->w; c->w = wc.width = w;
+-	c->oldh = c->h; c->h = wc.height = h;
++	c->oldx = c->x; c->x = wc.x = x + globalborder;
++	c->oldy = c->y; c->y = wc.y = y + globalborder;
++	c->oldw = c->w; c->w = wc.width = w - 2 * globalborder;
++	c->oldh = c->h; c->h = wc.height = h - 2 * globalborder;
+ 	wc.border_width = c->bw;
+ 	XConfigureWindow(dpy, c->win, CWX|CWY|CWWidth|CWHeight|CWBorderWidth, &wc);
+ 	configure(c);
+@@ -1690,12 +1697,12 @@ tile(Monitor *m)
+ 			h = (m->wh - my) / (MIN(n, m->nmaster) - i);
+ 			resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw), 0);
+ 			if (my + HEIGHT(c) < m->wh)
+-				my += HEIGHT(c);
++				my += HEIGHT(c) + 2 * globalborder;
+ 		} else {
+ 			h = (m->wh - ty) / (n - i);
+ 			resize(c, m->wx + mw, m->wy + ty, m->ww - mw - (2*c->bw), h - (2*c->bw), 0);
+ 			if (ty + HEIGHT(c) < m->wh)
+-				ty += HEIGHT(c);
++				ty += HEIGHT(c) + 2 * globalborder;
+ 		}
+ }
+ 

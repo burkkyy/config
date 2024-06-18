@@ -8,12 +8,12 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# Load in env variables
-[ -f ~/.config/bash/env ] && . ~/.config/bash/env
+# Load environment variables
+[ -f ~/.config/bash/env.sh ] && . ~/.config/bash/env.sh
 
-# Load in aliases 
-[ -f ~/.config/bash/aliases ] && . ~/.config/bash/aliases
+# Load bash aliases 
+[ -f ~/.config/bash/aliases.sh ] && . ~/.config/bash/aliases.sh
 
-# Sets bash prompt
-[ -f ~/.config/bash/prompt ] && PS1="$(~/.config/bash/prompt) " || PS1="[\u@\h \W]\$ "
+# Set bash prompt
+[ -f ~/.config/bash/prompt.sh ] && PS1="$(~/.config/bash/prompt.sh) " || PS1="[\u@\h \W]\$ "
 

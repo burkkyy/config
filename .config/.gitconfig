@@ -2,4 +2,7 @@
 	email = calebburke91@gmail.com
 	name = caleb
 [credential]
-	helper = store
+    helper = store
+[alias]
+    ch = checkout
+    s = status -s

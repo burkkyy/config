@@ -1,0 +1,6 @@
+google-chrome
+gotop
+libxft-bgra
+pgmodeler
+realvnc-vnc-viewer
+yay

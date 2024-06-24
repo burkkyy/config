@@ -1,6 +1,6 @@
 # config
-Some of my dotfiles, configs and scripts
+Repository for managing and configuring my system. Dotfiles, configs, user services and helful scripts.
 
 # Usage
-Add scripts and configs to system with `install.sh`
+Install entire environment with `setup.sh`.
 

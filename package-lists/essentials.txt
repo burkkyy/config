@@ -1,0 +1,12 @@
+base-devel
+cmake
+dosfstools
+efibootmgr
+git
+grub
+iwd
+lvm2
+mtools
+neovim
+openssh
+sudo

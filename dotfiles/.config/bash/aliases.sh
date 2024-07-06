@@ -10,6 +10,9 @@ alias '..'='cd ../'
 alias '...'='cd ../..'
 alias google='google-chrome-stable'
 
+# special aliases
+alias 'ff'='nvim $(fzf)'
+
 # git aliases
 alias gs='git status -s'
 

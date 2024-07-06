@@ -14,6 +14,9 @@
 # Load bash aliases 
 [ -f ~/.config/bash/aliases.sh ] && . ~/.config/bash/aliases.sh
 
+# Load shell key binds
+[ -f ~/.config/bash/binds.sh] && . ~/.config/bash/binds.sh
+
 # Set bash prompt
 [ -f ~/.config/bash/prompt.sh ] && PS1="$(~/.config/bash/prompt.sh) " || PS1="[\u@\h \W]\$ "
 

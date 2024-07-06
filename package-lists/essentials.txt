@@ -1,9 +1,16 @@
 base-devel
 dosfstools
 efibootmgr
+fd
+fzf
+git
 grub
 iwd
 lvm2
+man-db
 mtools
+neovim
 openssh
+pulseaudio
 sudo
+tmux

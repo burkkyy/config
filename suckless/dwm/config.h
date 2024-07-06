@@ -33,7 +33,7 @@ static const char *downbrightness[] = {"/home/caleb/.local/bin/brightness_down",
 static const char *emojimenu[] = {"/home/caleb/.local/bin/dmenuunicode", NULL};
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "ﭮ", "", "", "" };
+static const char *tags[] = { "", "", "3", "4", "5", "6", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):

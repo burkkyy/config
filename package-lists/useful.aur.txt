@@ -1,0 +1,5 @@
+flameshot
+google-chrome
+jq
+visual-studio-code-bin
+vlc

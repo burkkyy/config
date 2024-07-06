@@ -1,8 +1,3 @@
-feh
 flameshot
-git
 jq
-neofetch
-neovim
 vlc
-wireguard-tools

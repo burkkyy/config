@@ -1,5 +1,6 @@
 flameshot
 google-chrome
+htop
 jq
 visual-studio-code-bin
 vlc

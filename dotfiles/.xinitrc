@@ -1,22 +1,18 @@
+#
+# ~/.xinitrc
+#
+
 # Turn off this random display I dont understand why exists 
-#
-# Laptop config
-#
-# xrandr --output DP-3 --off
-# TODO: Investigate what this display is
-# Change xorg-server screen resolution
+# xrandr --output DP-3 --off # TODO: Investigate what this display is
 # xrandr --output eDP-1 --mode 2560x1440
 
-#
-# Set the wallpaper
-#
 # feh --no-fehbg --bg-center '/home/caleb/Pictures/nord.png'
 
-#
-# Background processes for dwm
+xrandr --output DP-2 --mode 1920x1080 --rate 144.00
+
 # TODO: Fix / refactor dwmbar_loop
-#
 dwmbar_loop &
-xcompmgr -c & # For transparent windows
+
+# xcompmgr -c & # For transparent windows
 
 exec dwm

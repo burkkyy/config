@@ -35,14 +35,14 @@ get_date() { \
 }
 
 status() { \
-	get_thermals
+	#get_thermals
 	get_mem
-	get_brightness
+	#get_brightness
 	get_volume
-	get_battery
+	#get_battery
 	get_date
 	get_time
 }
 
-xsetroot -name "$(status | tr '\n' ' ')"	
+xsetroot -name "  $(status | tr '\n' ' ')"	
 

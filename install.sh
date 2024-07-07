@@ -58,7 +58,7 @@ install_bundle(){
   BUNDLE_NAME=$1
   BUNDLE_PATH="package-lists/$1.txt"
 
-  [ $2 = true ] && {
+  [ "$2" == "true" ] && {
     info "Packages in '$BUNDLE_NAME':";
     cat $BUNDLE_PATH;
   }
@@ -88,7 +88,7 @@ install_aur_bundle(){
     exit 1;
   }
 
-  [ $2 = true ] && {
+  [ "$2" == "true" ] && {
     info "Packages in '$BUNDLE_NAME':";
     cat $BUNDLE_PATH;
   }
@@ -129,8 +129,24 @@ install_yay(){
 }
 
 install_nvchad(){
-  sudo pacman -S --needed --noconfirm - < package-lists/nvchad-prerequisites.txt
-  git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+  install_bundle nvchad
+  
+  #
+  # Check if nvchad is already installed
+  # 
+  [ -e ~/.config/nvim/lua ] && {
+    info "NvChad already installed. Skipping."
+    return
+  }
+
+  #
+  # Remove old config
+  #
+  rm -rf ~/.config/nvim
+  rm -rf ~/.local/state/nvim
+  rm -rf ~/.local/share/nvim
+  
+  git clone https://github.com/NvChad/starter ~/.config/nvim --depth 1
   success "Installed NvChad, run nvim to finalize."
 }
 
@@ -170,7 +186,7 @@ install_dotfile(){
 #
 # Update system and setup config install env
 #
-step_1(){
+step_1_update_system(){
   git submodule update --init --recursive
   info "Updating system..."
   sudo pacman -Syyuu --noconfirm || {
@@ -183,7 +199,7 @@ step_1(){
 #
 # Install config
 #
-step_2(){
+step_2_install_config(){
   install_dotfile "$PWD/dotfiles/.config" "$HOME/.config" || {
     warning "Failed to install config!"
   }
@@ -192,14 +208,14 @@ step_2(){
 #
 # Install essential bundle
 #
-step_3(){
+step_3_install_essential(){
   install_bundle essentials true
 }
 
 #
 # Install yay (Arch AUR helper)
 #
-step_4(){
+step_4_install_yay(){
   # Check if yay is already installed
   which yay 1>/dev/null 2>&1
   [ $? -eq 0 ] && {
@@ -212,27 +228,21 @@ step_4(){
 #
 # Install usefull bundle
 #
-step_5(){
+step_5_install_useful(){
   install_aur_bundle useful true
 }
 
 #
 # Install nvchad test editor (Favorite text editor)
 #
-step_6(){
-  yoN "(TODO) Install NvChad as text editor?" && {
-    ls
-    #install_bundle nvchad false true
-    # clone my nvchad repo
-    # git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
-    #success "Installed NvChad. Run nvim to finalize."
-  }
+step_6_install_nvchad(){
+  install_nvchad
 }
 
 #
 # Install suckless software
 #
-step_7(){
+step_7_install_suckless(){
   SUCKLESS_PATH="$PWD/suckless"
   install_aur_bundle suckless false true
   
@@ -255,7 +265,7 @@ step_7(){
 #
 # Install user scripts
 #
-step_8(){
+step_8_install_user_scripts(){
   USER_SCRIPTS="$PWD/dotfiles/.local/bin"
   INSTALL_PATH="$HOME/.local/bin"
   mkdir -p "$INSTALL_PATH"
@@ -266,28 +276,114 @@ step_8(){
 #
 # Install replace .bashrc
 #
-step_9(){
+step_9_install_bashrc(){
   install_dotfile "$PWD/dotfiles/.bashrc" "$HOME/.bashrc"
 }
 
 #
-# Install replace .bashrc
+# Install replace .xinitrc
 #
-step_10(){
+step_10_install_xinitrc(){
   install_dotfile "$PWD/dotfiles/.xinitrc" "$HOME/.xinitrc"
 }
 
-step_1
-step_2
-step_3
-step_4
-step_5
-#step_6
-step_7
-step_8
-step_9
-step_10
+step_all(){
+  step_1_update_system
+  step_2_install_config
+  step_3_install_essential
+  step_4_install_yay
+  step_5_install_useful
+  step_6_install_nvchad
+  step_7_install_suckless
+  step_8_install_user_scripts
+  step_9_install_bachrc
+  step_10_install_xinitrc
+}
 
+show_help() {
+    echo "Usage: $0 [OPTIONS]"
+    echo
+    echo "Install dotfiles and configurations."
+    echo
+    echo "Options:"
+    echo "  config            Install general configuration files"
+    echo "  essential         Install packages from package-lists/essential.txt"
+    echo "  yay               Builds and installs yay AUR helper"
+    echo "  useful            Install packages from package-lists/useful.aur.txt"
+    echo "  nvchad            Install nvchad text editor"
+    echo "  suckless          Builds and installs suckless software"
+    echo "  scripts           Copies user scripts from dotfiles/.local/bin to ~/.local/bin"
+    echo "  bashrc            Replaces ~/.bashrc with dotfiles/.bashrc"
+    echo "  xinitrc           Replaces ~/.xinitrc with dotfiles/.xinitrc"
+    echo "  all               Install all above"
+    echo "  soft              Runs a soft install. Essential, yay, useful, scripts, bashrc, xinitrc."
+    echo "  -h, --help        Show this help message and exit"
+}
+
+main() {
+  update "Starting installation..."
+
+  [ $# -eq 0 ] && {
+    error "No arguments provided."
+    show_help
+    exit 0
+  }
+
+  for arg in "$@"; do
+    case "$arg" in
+      config)
+	step_2_install_config
+      ;;
+      essential)
+	step_3_install_essential
+      ;;
+      yay)
+	step_4_install_yay
+      ;;
+      useful)
+	step_5_install_useful
+      ;;
+      nvchad)
+	step_6_install_nvchad
+      ;;
+      suckless)
+	step_7_install_suckless
+      ;;
+      scripts)
+	step_8_install_user_scripts
+      ;;
+      bashrc)
+	step_9_install_bashrc
+      ;;
+      xinitrc)
+	step_10_install_xinitrc
+      ;;
+      all)
+	step_all
+      ;;
+      soft)
+	step_1_update_system
+	step_2_install_config
+	step_3_install_essential
+	step_4_install_yay
+	step_8_install_user_scripts
+	step_9_install_bashrc
+	step_10_install_xinitrc
+      ;;
+      -h|--help)
+        show_help
+	exit 0
+      ;;
+      *)
+        error "Unknown argument: $arg"
+	show_help
+	exit 1
+      ;;
+    esac
+  done
+}
+
+main "$@"
 success "Install config complete."
 
 # Reset sudo auth timestamp

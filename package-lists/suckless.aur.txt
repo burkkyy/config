@@ -4,14 +4,12 @@ fontconfig
 freetype2
 libx11
 libxft
-libxft-bgra
-libxinerma
+libxinerama
 noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
 transset-df
 ttf-dejavu
-ttf-emojione
 ttf-freefont
 ttf-hack
 ttf-hack
@@ -22,8 +20,8 @@ ttf-nerd-fonts-symbols-common
 ttf-opensans
 ttf-roboto
 webkit2gtk
+xcompmgr
 xorg-server
-xorg-xcompmgr
 xorg-xdpyinfo
 xorg-xinit
 xorg-xrandr

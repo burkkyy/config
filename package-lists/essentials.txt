@@ -1,3 +1,4 @@
+alsa-utils
 base-devel
 dosfstools
 efibootmgr
@@ -10,7 +11,11 @@ lvm2
 man-db
 mtools
 neovim
+nodejs
+npm
 openssh
 pulseaudio
+pulseaudio-alsa
 sudo
 tmux
+unzip

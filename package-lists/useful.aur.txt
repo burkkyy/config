@@ -1,3 +1,4 @@
+bash-completion
 flameshot
 google-chrome
 htop

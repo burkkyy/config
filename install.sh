@@ -312,6 +312,13 @@ step_11_install_local_share(){
   success "Installed user scripts."
 }
 
+install_bash(){
+  step_5_install_useful
+  step_9_install_bashrc
+  step_8_install_user_scripts
+  step_2_install_config
+}
+
 step_all(){
   step_1_update_system
   step_2_install_config
@@ -357,57 +364,56 @@ main() {
   for arg in "$@"; do
     case "$arg" in
       config)
-  step_2_install_config
+        step_2_install_config
       ;;
       essential)
-	step_3_install_essential
+	      step_3_install_essential
       ;;
       yay)
-	step_4_install_yay
+	      step_4_install_yay
       ;;
       useful)
-	step_5_install_useful
+	      step_5_install_useful
       ;;
       nvchad)
-	step_6_install_nvchad
+	      step_6_install_nvchad
       ;;
       suckless)
-	step_7_install_suckless
+	      step_7_install_suckless
       ;;
       scripts)
-	step_8_install_user_scripts
+	      step_8_install_user_scripts
       ;;
       bash)
-	step_9_install_bashrc
-  step_8_install_user_scripts
+	      install_bash
       ;;
       xinitrc)
-	step_10_install_xinitrc
+	      step_10_install_xinitrc
       ;;
       local)
-  step_8_install_user_scripts
-  step_11_install_local_share
+        step_8_install_user_scripts
+        step_11_install_local_share
       ;;
       all)
-	step_all
+	      step_all
       ;;
       soft)
-	step_1_update_system
-	step_2_install_config
-	step_3_install_essential
-	step_4_install_yay
-	step_8_install_user_scripts
-	step_9_install_bashrc
-	step_10_install_xinitrc
+	      step_1_update_system
+	      step_2_install_config
+	      step_3_install_essential
+	      step_4_install_yay
+	      step_8_install_user_scripts
+	      step_9_install_bashrc
+	      step_10_install_xinitrc
       ;;
       -h|--help)
         show_help
-	exit 0
+	      exit 0
       ;;
       *)
         error "Unknown argument: $arg"
-	show_help
-	exit 1
+	      show_help
+	      exit 1
       ;;
     esac
   done

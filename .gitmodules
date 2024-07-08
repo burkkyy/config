@@ -1,9 +1,9 @@
 [submodule ".suckless/dwm"]
 	path = suckless/dwm
-	url = https://github.com/burkkyy/dwm.git
+	url = git@github.com:burkkyy/dwm.git
 [submodule ".suckless/st"]
 	path = suckless/st
-	url = https://github.com/burkkyy/st.git
+	url = git@github.com:burkkyy/st.git
 [submodule ".suckless/dmenu"]
 	path = suckless/dmenu
-	url = https://github.com/burkkyy/dmenu.git
+	url = git@github.com:burkkyy/dmenu.git

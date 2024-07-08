@@ -1,0 +1,6 @@
+bash-completion
+dbeaver
+direnv
+docker
+docker-compose
+visual-studio-code-bin

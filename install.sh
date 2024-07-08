@@ -200,9 +200,23 @@ step_1_update_system(){
 # Install config
 #
 step_2_install_config(){
-  install_dotfile "$PWD/dotfiles/.config" "$HOME/.config" || {
-    warning "Failed to install config!"
-  }
+  CONFIG_PATH="$PWD/dotfiles/.config"
+  
+  #find $CONFIG_PATH -maxdepth 1 -mindepth 1 | while read -r config; do
+  #  config="${config##*/}"
+  #  update "Installing $config..."
+  #  install_dotfile "$CONFIG_PATH/$config" "$HOME/.config/$config"
+  #done
+
+  for config in $CONFIG_PATH/* $CONFIG_PATH/.*; do
+    config="${config##*/}"
+    update "Installing $config..."
+    install_dotfile "$CONFIG_PATH/$config" "$HOME/.config/$config"
+  done
+
+  #install_dotfile "$PWD/dotfiles/.config" "$HOME/.config" || {
+   # warning "Failed to install config!"
+  #}
 }
 
 #
@@ -313,7 +327,7 @@ show_help() {
     echo "  nvchad            Install nvchad text editor"
     echo "  suckless          Builds and installs suckless software"
     echo "  scripts           Copies user scripts from dotfiles/.local/bin to ~/.local/bin"
-    echo "  bashrc            Replaces ~/.bashrc with dotfiles/.bashrc"
+    echo "  bash              Install user scripts for bash and replaces ~/.bashrc with dotfiles/.bashrc"
     echo "  xinitrc           Replaces ~/.xinitrc with dotfiles/.xinitrc"
     echo "  all               Install all above"
     echo "  soft              Runs a soft install. Essential, yay, useful, scripts, bashrc, xinitrc."
@@ -321,8 +335,6 @@ show_help() {
 }
 
 main() {
-  update "Starting installation..."
-
   [ $# -eq 0 ] && {
     error "No arguments provided."
     show_help
@@ -332,7 +344,7 @@ main() {
   for arg in "$@"; do
     case "$arg" in
       config)
-	step_2_install_config
+  step_2_install_config
       ;;
       essential)
 	step_3_install_essential
@@ -352,8 +364,9 @@ main() {
       scripts)
 	step_8_install_user_scripts
       ;;
-      bashrc)
+      bash)
 	step_9_install_bashrc
+  step_8_install_user_scripts
       ;;
       xinitrc)
 	step_10_install_xinitrc
@@ -384,7 +397,6 @@ main() {
 }
 
 main "$@"
-success "Install config complete."
 
 # Reset sudo auth timestamp
 #which sudo >/dev/null 2>&1

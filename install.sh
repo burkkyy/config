@@ -301,6 +301,17 @@ step_10_install_xinitrc(){
   install_dotfile "$PWD/dotfiles/.xinitrc" "$HOME/.xinitrc"
 }
 
+#
+# Install user local share
+#
+step_11_install_local_share(){
+  USER_SHARE="$PWD/dotfiles/.local/share"
+  INSTALL_PATH="$HOME/.local/share"
+  mkdir -p "$INSTALL_PATH"
+  cp "$USER_SHARE"/* "$INSTALL_PATH"
+  success "Installed user scripts."
+}
+
 step_all(){
   step_1_update_system
   step_2_install_config
@@ -312,6 +323,7 @@ step_all(){
   step_8_install_user_scripts
   step_9_install_bachrc
   step_10_install_xinitrc
+  step_11_install_local_share
 }
 
 show_help() {
@@ -330,6 +342,7 @@ show_help() {
     echo "  bash              Install user scripts for bash and replaces ~/.bashrc with dotfiles/.bashrc"
     echo "  xinitrc           Replaces ~/.xinitrc with dotfiles/.xinitrc"
     echo "  all               Install all above"
+    echo "  local             Install stuff for .local "
     echo "  soft              Runs a soft install. Essential, yay, useful, scripts, bashrc, xinitrc."
     echo "  -h, --help        Show this help message and exit"
 }
@@ -370,6 +383,10 @@ main() {
       ;;
       xinitrc)
 	step_10_install_xinitrc
+      ;;
+      local)
+  step_8_install_user_scripts
+  step_11_install_local_share
       ;;
       all)
 	step_all

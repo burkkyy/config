@@ -10,6 +10,7 @@ noto-fonts-cjk
 noto-fonts-emoji
 transset-df
 ttf-dejavu
+ttf-font-awesome
 ttf-freefont
 ttf-hack
 ttf-hack
@@ -20,6 +21,7 @@ ttf-nerd-fonts-symbols-common
 ttf-opensans
 ttf-roboto
 webkit2gtk
+xclip
 xcompmgr
 xorg-server
 xorg-xdpyinfo

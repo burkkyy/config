@@ -3,4 +3,5 @@ dbeaver
 direnv
 docker
 docker-compose
+meld
 visual-studio-code-bin

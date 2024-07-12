@@ -18,6 +18,7 @@ export __GL_SHADER_DISK_CACHE_PATH="$CONFIG/nv"
 
 # https://asdf-vm.com/guide/getting-started.html
 export ASDF_DIR="$CONFIG/.asdf"
+export ASDF_DATA_DIR="$ASDF_DIR"
 . "$ASDF_DIR/asdf.sh"
 . "$ASDF_DIR/completions/asdf.bash"
 

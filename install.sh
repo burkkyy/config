@@ -350,6 +350,7 @@ show_help() {
     echo "  xinitrc           Replaces ~/.xinitrc with dotfiles/.xinitrc"
     echo "  all               Install all above"
     echo "  local             Install stuff for .local "
+    echo "  bundle             Install a package bundle. Ex ./install.sh bundle dev"
     echo "  soft              Runs a soft install. Essential, yay, useful, scripts, bashrc, xinitrc."
     echo "  -h, --help        Show this help message and exit"
 }
@@ -393,6 +394,10 @@ main() {
       local)
         step_8_install_user_scripts
         step_11_install_local_share
+      ;;
+      bundle)
+        install_aur_bundle $2
+        exit 0
       ;;
       all)
 	      step_all

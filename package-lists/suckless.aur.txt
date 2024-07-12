@@ -8,6 +8,7 @@ libxinerama
 noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
+sxiv
 transset-df
 ttf-dejavu
 ttf-font-awesome

@@ -1,4 +1,5 @@
 base-devel
+dunst
 feh
 fontconfig
 freetype2

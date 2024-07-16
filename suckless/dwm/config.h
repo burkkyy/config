@@ -71,6 +71,9 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
+#define TABKEY XK_Tab
+#define ALTKEY Mod1Mask
+#define SUPERKEY Mod4Mask // aka windows key
 #define MODKEY Mod1Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \

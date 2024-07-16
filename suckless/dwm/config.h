@@ -33,9 +33,9 @@ static const unsigned int alphas[][3]      = {
 };
 
 /* audio constants */
-static const char *upvol[]   = { "/home/caleb/.local/bin/upvol", NULL};
-static const char *downvol[] = { "/home/caleb/.local/bin/downvol", NULL};
-static const char *mutevol[] = { "/home/caleb/.local/bin/mutevol", NULL};
+static const char *upvol[]   = { "amixer", "set", "Master", "2%+", NULL};
+static const char *downvol[] = { "amixer", "set", "Master", "2%-", NULL};
+static const char *mutevol[] = { "amixer", "set", "Master", "toggle", NULL};
 
 /* brightness constants */
 static const char *upbrightness[]   = {"/home/caleb/.local/bin/brightness_up", NULL};

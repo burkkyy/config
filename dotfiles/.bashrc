@@ -3,7 +3,7 @@
 #
 
 # Set the terminal transparency for st
-[[ "$(cat /proc/$PPID/comm)" = "st" ]] && transset-df "0.80" --id "$WINDOWID" > /dev/null
+[[ "$(cat /proc/$PPID/comm)" = "st" ]] && transset-df "0.90" --id "$WINDOWID" > /dev/null
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return

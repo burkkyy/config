@@ -14,11 +14,12 @@ alias google='google-chrome-stable'
 alias 'ff'='nvim $(fzf)'
 
 # git aliases
-alias gs='git status -s'
+alias gs='git status'
+alias ga='git add'
 
 # Single letter aliases
 alias d='du_color'
-alias g='git'
+alias g='git status'
 alias l='ls -alh'
 alias n='neofetch --config ~/.config/neofetch.conf'
 alias p='pacman'

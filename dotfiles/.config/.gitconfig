@@ -2,7 +2,26 @@
 	email = calebburke91@gmail.com
 	name = caleb
 [credential]
-    helper = store
+  helper = store
 [alias]
-    ch = checkout
-    s = status -s
+  co = checkout
+	chp = cherry-pick
+	r = rebase
+	rom = rebase origin/main
+	rot = rebase origin/test
+	blg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	br = branch
+	ci = commit
+	st = status
+	alias = config --get-regexp alias
+	fetch-and-prune-all = !git fetch --prune --all && git pull
+	fpa = fetch-and-prune-all
+	ls-orphans = !git for-each-ref --format '%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)' refs/heads  | awk 'length($1) > 0'
+	lso = ls-orphans
+	purge-orphans = !"for branch in $(git ls-orphans); do git branch -d $branch; done"
+	purge-orphans-force = !"for branch in $(git ls-orphans); do git branch -d $branch; done"
+	po = purge-orphans
+	pof = purge-orphans-force
+	sync-branches = !git fetch-and-prune-all && git purge-orphans
+	sb = sync-branches
+

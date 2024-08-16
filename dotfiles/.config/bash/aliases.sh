@@ -1,5 +1,14 @@
 # Alias definitions
 
+# helper funcs
+_git(){
+  [ $# -eq 0 ] && {
+    git status && git branch
+  } || {
+    git "$@"
+  }
+}
+
 # Default aliases
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
@@ -19,7 +28,7 @@ alias ga='git add'
 
 # Single letter aliases
 alias d='du_color'
-alias g='git status'
+alias g=_git
 alias l='ls -alh'
 alias n='neofetch --config ~/.config/neofetch.conf'
 alias p='pacman'

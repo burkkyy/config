@@ -7,8 +7,8 @@ OPTIONS=($(ls "$OPTIONS_DIR"/*.sh))
 echo "$WORK_DIR" "$OPTIONS_DIR"
 
 # Check if any scripts
-[ ${#OPTIONS[@] -eq 0} ] && {
-
+[ ${#OPTIONS[@]} -eq 0 ] && {
+  echo 1
 }
 
 usage(){
@@ -20,4 +20,3 @@ usage(){
   done
 }
 
-usage

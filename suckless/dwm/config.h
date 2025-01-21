@@ -1,6 +1,9 @@
 /* See LICENSE file for copyright and license details. */
 #include <X11/XF86keysym.h>
 
+#include <X11/keysymdef.h>
+#define XK_MISCELLANY
+
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int gappx     = 8;	      /* gap pixel between windows */
@@ -74,7 +77,7 @@ static const Layout layouts[] = {
 #define TABKEY XK_Tab
 #define ALTKEY Mod1Mask
 #define SUPERKEY Mod4Mask // aka windows key
-#define MODKEY Mod1Mask
+#define MODKEY SUPERKEY
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -91,6 +94,7 @@ static const char *termcmd[]  = { "st", NULL };
 static const char *print_screen_cmd[] = { "flameshot", "gui", NULL };
 
 #include "shiftview.c"
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -129,7 +133,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	/* User defined keybinds */
 	{ MODKEY, 	XK_e,	   			            spawn, {.v = emojimenu } },
-  { 0,        XK_Print,                 spawn, {.v = print_screen_cmd } },
+  { 0,        XK_F13,             			spawn, {.v = print_screen_cmd } },
   { 0,				XF86XK_MonBrightnessDown,	spawn, {.v = downbrightness } },
 	{ 0,				XF86XK_MonBrightnessUp,		spawn, {.v = upbrightness } },
 	{ 0,				XF86XK_AudioLowerVolume, 	spawn, {.v = downvol } },
@@ -153,4 +157,3 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
-

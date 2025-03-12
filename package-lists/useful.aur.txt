@@ -1,8 +1,0 @@
-bash-completion
-flameshot
-google-chrome
-htop
-jq
-neofetch
-visual-studio-code-bin
-vlc

@@ -1,5 +1,0 @@
-neovim
-ripgrep
-ttf-hack
-ttf-nerd-fonts-symbols
-ttf-nerd-fonts-symbols-common

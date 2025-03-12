@@ -5,6 +5,7 @@ efibootmgr
 fd
 fzf
 git
+github-cli
 grub
 iwd
 lvm2

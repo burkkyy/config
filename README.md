@@ -1,6 +1,6 @@
 # config
 
-Repository for managing and configuring my system. Dotfiles, configs, user services and helful scripts.
+Repository for managing and configuring my system
 
 ## Usage
 
@@ -18,16 +18,12 @@ config sync
 
 ## Future plans/features
 
-- To edit git config:
+- bring suckless software up to date
+- switch to python or ruby for config script
+- load/store `config.json` more dynamically
+- update scripts in `dotfiles/.local/bin`
+- ability to edit config of other programs, like git:
 
 ```sh
 ./config.sh git edit
-./config sync
 ```
-
-- Switch to python or ruby for config script?
-- Load/Store `config.json` more dynamically
-
-### Notes
-
-- `dotfiles/.local/bin` contains out of date, unused user scripts

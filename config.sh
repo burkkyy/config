@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONFIG_FILE="./config.json"
+CONFIG_FILE="~/config/config.json"
 
 PINFO_COLOR="1;34"
 PUPDATE_COLOR="1;32"
@@ -64,10 +64,6 @@ fpacman() {
   }
 }
 
-ensure_required() {
-  fpacman requirements.txt
-}
-
 ensure_package_manager(){
   if command -v pacman >/dev/null 2>&1; then
     return 0
@@ -82,7 +78,23 @@ ensure_aur_helper() {
     return 0
   fi
 
-  install_yay
+  WORK_DIR=$(pwd)
+  
+  sudo pacman -S --needed --noconfirm git base-devel # yay dependencies
+  TMP_YAY_BUILD_DIR=$(mktemp -d)
+  git clone https://aur.archlinux.org/yay.git "$TMP_YAY_BUILD_DIR/yay"
+  
+  update "Moving out of $WORK_DIR, into $TMP_YAY_BUILD_DIR/yay..."
+  cd "$TMP_YAY_BUILD_DIR/yay"
+  
+  update "Building yay..."
+  makepkg -si
+  
+  update "Returning to $WORK_DIR"
+  cd "$WORK_DIR"
+
+  update "Removing $TMP_YAY_BUILD_DIR"
+  rm -rf $TMP_YAY_BUILD_DIR
 }
 
 ensure_config_json() {
@@ -94,9 +106,7 @@ ensure_config_json() {
 
 init() {
   ensure_package_manager
-  sudo pacman -Sy 1>/dev/null
-
-  ensure_required
+  fpacman requirements.txt
   ensure_aur_helper
   ensure_config_json
 }
@@ -107,7 +117,8 @@ usage() {
   echo "Manages some system configurations."
   echo
   echo "Options:"
-  echo "  -h, --help        Show this help message and exit"
+  echo "  init              initializes config"
+  echo "  -h, --help        Shows this help message and exit"
 }
 
 # pinfo text
@@ -124,6 +135,20 @@ main() {
     usage
     exit 0
   }
+
+  for arg in "$@"; do
+    case "$arg" in
+      -h|--help)
+        usage
+        exit 0
+      ;;
+      *)
+        perror "Unknown argument: $arg"
+        usage
+        exit 1
+      ;;
+    esac
+  done
 }
 
-main
+main "$@"

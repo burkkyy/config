@@ -2,57 +2,32 @@
 
 Repository for managing and configuring my system. Dotfiles, configs, user services and helful scripts.
 
-To install the config command:
+## Usage
 
-```bash
-./config
+Assuming `~/.local/bin` is added to `$PATH`, install config script via
+
+```sh
+./config.sh init
 ```
 
-## Example Usage
+You only need to call `init` once, any changes to this repo can be seen by the system by calling:
 
-To edit git config:
+```sh
+config sync
+```
 
-```bash
+## Future plans/features
+
+- To edit git config:
+
+```sh
 ./config.sh git edit
 ./config sync
 ```
 
-If instaled:
+- Switch to python or ruby for config script?
+- Load/Store `config.json` more dynamically
 
-```bash
-config sync
-```
-
-## Adding your own options to config command
-
-Create a bash script file in `bin/`.
-**Ex.** `bin/hello.sh`
-
-```bash
-echo "hello $1"
-```
-
-Assuming config is installed, this script can be called via:
-
-```
-config hello joe
-```
-
-**NOTE:** Arguments passed to hello are original order. ie. $0 is hello and $1 is joe
-
-## Notes
+### Notes
 
 - `dotfiles/.local/bin` contains out of date, unused user scripts
-
-## todo features
-
-**better package installer**
-
-- Install packages as groups?
-
-Ex usage:
-
-```sh
-./config install group core
-./config i group core
-```

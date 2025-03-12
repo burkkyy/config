@@ -1,6 +1,9 @@
 #!/bin/bash
 
-CONFIG_FILE="~/config/config.json"
+CONFIG_REPO_DIR=~/config
+CONFIG_JSON_FILE=~/config/config.json
+CONFIG_FILE=~/config/config.sh
+CONFIG_TARGET_FILE=~/.local/bin/config
 
 PINFO_COLOR="1;34"
 PUPDATE_COLOR="1;32"
@@ -98,10 +101,35 @@ ensure_aur_helper() {
 }
 
 ensure_config_json() {
-  [ ! -e $CONFIG_FILE ] && {
-    pfatal "config.json does not exist"
+  [ ! -e $CONFIG_JSON_FILE ] && {
+    pfatal "$CONFIG_JSON_FILE does not exist"
     exit 1
   }
+}
+
+sync_repo() {
+  if [ -d "$CONFIG_REPO_DIR/.git" ]; then
+      cd "$CONFIG_REPO_DIR" || pfatal "Failed to change to $CONFIG_REPO_DIR"
+      git pull origin main 1>/dev/null 2>&1 || pwarning "Failed to pull latest changes (continuing anyway)"
+      cd - >/dev/null || pfatal "Failed to return from $CONFIG_REPO_DIR"
+      pupdate "synced git repo"
+  else
+      pwarning "$CONFIG_REPO_DIR is not a Git repository; skipping pull"
+  fi
+}
+
+sync_config_script() {
+  mkdir -p ~/.local/bin
+
+  [ ! -e "$CONFIG_TARGET_FILE" ] && {
+    pwarning "created symbolic link $CONFIG_FILE to $CONFIG_TARGET_FILE"
+    ln -s "$CONFIG_FILE" "$CONFIG_TARGET_FILE" || {
+      pfatal "failed to make symbolic link $CONFIG_FILE to $CONFIG_TARGET_FILE"
+      exit 1;
+    }
+  }
+
+  pupdate "synced config script"
 }
 
 init() {
@@ -109,6 +137,47 @@ init() {
   fpacman requirements.txt
   ensure_aur_helper
   ensure_config_json
+  sync
+
+  pinfo "init complete"
+  pinfo "You dont have to run this command again, instead use 'config sync'"
+}
+
+sync() {
+  [ ! -d "$CONFIG_REPO_DIR" ] && pfatal "$CONFIG_REPO_DIR does not exist"
+  [ ! -f "$CONFIG_FILE" ] && pfatal "$CONFIG_FILE not found in $CONFIG_REPO_DIR"
+
+  sync_repo
+  sync_config_script
+}
+
+install_package_group() {
+  [ -z "$1" ] && {
+    pfatal "No package group specified";
+    exit 1;
+  }
+
+  if ! jq -e --arg g "$1" '.["known-package-groups"] | index($g)' "$CONFIG_JSON_FILE" >/dev/null; then
+    pfatal "Unknown package group: $1"
+    exit 1
+  fi
+
+  jq -r --arg g "$1" '.["package-groups"][$g][]' "$CONFIG_JSON_FILE" | yay -Sy --needed --noconfirm - || {
+    pfatal "failed to install package group";
+    exit 1;
+  };
+
+  pupdate "installed package group '$1'"
+}
+
+packages_command() {
+  [ -z "$1" ] && {
+    pwarning "No package group specified";
+    pinfo "list of package groups:";
+    jq -r '."known-package-groups"' "$CONFIG_JSON_FILE";
+  }
+
+  install_package_group "$1"
 }
 
 usage() {
@@ -117,7 +186,9 @@ usage() {
   echo "Manages some system configurations."
   echo
   echo "Options:"
-  echo "  init              initializes config"
+  echo "  init              initializes config install and then calls sync"
+  echo "  sync              Syncs config data in $CONFIG_REPO to rest of system"
+  echo "  packages <group>  Installs packages in a group from $CONFIG_FILE"
   echo "  -h, --help        Shows this help message and exit"
 }
 
@@ -129,8 +200,6 @@ usage() {
 # pfatal text
 
 main() {
-  init
-
   [ $# -eq 0 ] && {
     usage
     exit 0
@@ -138,6 +207,19 @@ main() {
 
   for arg in "$@"; do
     case "$arg" in
+      init)
+        init
+        exit 0
+      ;;
+      sync)
+        sync
+        exit 0
+      ;;
+      packages)
+        shift
+        packages_command "$1"
+        exit 0
+      ;;
       -h|--help)
         usage
         exit 0

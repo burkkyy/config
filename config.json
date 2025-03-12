@@ -1,12 +1,5 @@
 {
-  "known-package-groups": [
-    "arch-install",
-    "suckless",
-    "core",
-    "dev",
-    "useful",
-    "nvchad"
-  ],
+  "known-package-groups": ["arch-install", "suckless", "core", "dev", "misc"],
   "package-groups": {
     "arch-install": [
       "alsa-utils",
@@ -26,8 +19,8 @@
       "nodejs",
       "npm",
       "openssh",
-      "pulseaudio",
       "pulseaudio-alsa",
+      "pulseaudio",
       "sudo",
       "tmux",
       "unzip"
@@ -41,20 +34,19 @@
       "libx11",
       "libxft",
       "libxinerama",
-      "noto-fonts",
       "noto-fonts-cjk",
       "noto-fonts-emoji",
+      "noto-fonts",
       "sxiv",
       "transset-df",
       "ttf-dejavu",
       "ttf-font-awesome",
       "ttf-freefont",
       "ttf-hack",
-      "ttf-hack",
       "ttf-joypixels",
       "ttf-liberation",
-      "ttf-nerd-fonts-symbols",
       "ttf-nerd-fonts-symbols-common",
+      "ttf-nerd-fonts-symbols",
       "ttf-opensans",
       "ttf-roboto",
       "webkit2gtk",
@@ -71,27 +63,12 @@
       "bash-completion",
       "dbeaver",
       "direnv",
-      "docker",
       "docker-compose",
+      "docker",
+      "flameshot",
       "meld",
       "visual-studio-code-bin"
     ],
-    "useful": [
-      "bash-completion",
-      "flameshot",
-      "google-chrome",
-      "htop",
-      "jq",
-      "neofetch",
-      "visual-studio-code-bin",
-      "vlc"
-    ],
-    "nvchad": [
-      "neovim",
-      "ripgrep",
-      "ttf-hack",
-      "ttf-nerd-fonts-symbols",
-      "ttf-nerd-fonts-symbols-common"
-    ]
+    "misc": ["google-chrome", "htop", "ripgrep", "neofetch", "vlc"]
   }
 }

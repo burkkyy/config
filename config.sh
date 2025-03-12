@@ -172,9 +172,9 @@ install_package_group() {
 
 packages_command() {
   [ -z "$1" ] && {
-    pwarning "No package group specified";
     pinfo "list of package groups:";
     jq -r '."known-package-groups"' "$CONFIG_JSON_FILE";
+    return 0;
   }
 
   install_package_group "$1"
@@ -186,9 +186,9 @@ usage() {
   echo "Manages some system configurations."
   echo
   echo "Options:"
-  echo "  init              initializes config install and then calls sync"
-  echo "  sync              Syncs config data in $CONFIG_REPO to rest of system"
-  echo "  packages <group>  Installs packages in a group from $CONFIG_FILE"
+  echo "  init              Run this once to install this config, then use sync"
+  echo "  sync              Syncs config data in $CONFIG_REPO_DIR to rest of system"
+  echo "  packages <group>  Installs packages in a group from $CONFIG_JSON_FILE"
   echo "  -h, --help        Shows this help message and exit"
 }
 

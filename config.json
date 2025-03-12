@@ -1,43 +1,40 @@
 {
-  "known-package-groups": ["arch-install", "suckless", "core", "dev", "misc"],
+  "known-package-groups": ["core", "dev", "misc"],
   "package-groups": {
-    "arch-install": [
+    "core": [
       "alsa-utils",
       "base-devel",
+      "bash-completion",
       "dosfstools",
+      "dunst",
       "efibootmgr",
       "fd",
+      "feh",
+      "fontconfig",
+      "freetype2",
       "fzf",
       "git",
       "github-cli",
       "grub",
       "iwd",
+      "libx11",
+      "libxft",
+      "libxinerama",
       "lvm2",
       "man-db",
       "mtools",
       "neovim",
       "nodejs",
+      "noto-fonts-cjk",
+      "noto-fonts-emoji",
+      "noto-fonts",
       "npm",
       "openssh",
       "pulseaudio-alsa",
       "pulseaudio",
       "sudo",
-      "tmux",
-      "unzip"
-    ],
-    "suckless": [
-      "base-devel",
-      "dunst",
-      "feh",
-      "fontconfig",
-      "freetype2",
-      "libx11",
-      "libxft",
-      "libxinerama",
-      "noto-fonts-cjk",
-      "noto-fonts-emoji",
-      "noto-fonts",
       "sxiv",
+      "tmux",
       "transset-df",
       "ttf-dejavu",
       "ttf-font-awesome",
@@ -49,6 +46,7 @@
       "ttf-nerd-fonts-symbols",
       "ttf-opensans",
       "ttf-roboto",
+      "unzip",
       "webkit2gtk",
       "xclip",
       "xcompmgr",
@@ -58,17 +56,16 @@
       "xorg-xrandr",
       "xorg-xsetroot"
     ],
-    "core": [],
     "dev": [
-      "bash-completion",
       "dbeaver",
       "direnv",
       "docker-compose",
       "docker",
       "flameshot",
       "meld",
-      "visual-studio-code-bin"
+      "visual-studio-code-bin",
+      "htop"
     ],
-    "misc": ["google-chrome", "htop", "ripgrep", "neofetch", "vlc"]
+    "misc": ["google-chrome", "ripgrep", "neofetch", "vlc"]
   }
 }

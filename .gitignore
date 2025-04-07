@@ -2,6 +2,6 @@
 notes.md
 
 *.o
-st
-dwm
-dmenu
+suckless/st/st
+suckless/dwm/dwm
+suckless/dmenu/dmenu

@@ -199,6 +199,18 @@ usage() {
 # perror text
 # pfatal text
 
+which git
+[ $? -eq 1 ] && {
+  echo "missing git";
+  exit 1;
+}
+
+which jq
+[ $? -eq 1 ] && {
+  echo "missing jq";
+  exit 1;
+}
+
 main() {
   [ $# -eq 0 ] && {
     usage

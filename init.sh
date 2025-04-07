@@ -186,6 +186,7 @@ usage() {
   echo "Manages some system configurations."
   echo
   echo "Options:"
+  echo "  init              Run this once to install this config, then use sync"
   echo "  sync              Syncs config data in $CONFIG_REPO_DIR to rest of system"
   echo "  packages <group>  Installs packages in a group from $CONFIG_JSON_FILE"
   echo "  -h, --help        Shows this help message and exit"

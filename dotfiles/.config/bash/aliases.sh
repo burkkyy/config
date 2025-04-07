@@ -36,10 +36,5 @@ alias r='ranger'
 alias t='tmux'
 alias v='nvim'
 
-# Accessing config
-#alias gitconfig="v ~/.gitconfig"
-#alias aliasconfig="v ~/.config/bash/aliases"
-# TODO: Make config its own command
-
 # Load in any secret aliases if there may be
 [ -f ~/aliases.sh.secret ] && . ~/aliases.sh.secret

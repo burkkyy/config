@@ -33,7 +33,7 @@ alias l='ls -alh'
 alias n='neofetch --config ~/.config/neofetch.conf'
 alias p='pacman'
 alias r='ranger'
-alias t='tree -L 2'
+alias t='tmux'
 alias v='nvim'
 
 # Accessing config
@@ -41,6 +41,5 @@ alias v='nvim'
 #alias aliasconfig="v ~/.config/bash/aliases"
 # TODO: Make config its own command
 
-# Load in any secert aliases if there may be
-[ -f ~/aliases.sh.secert ] && . ~/aliases.sh.secert
-
+# Load in any secret aliases if there may be
+[ -f ~/aliases.sh.secret ] && . ~/aliases.sh.secret

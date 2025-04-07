@@ -204,6 +204,18 @@ main() {
     exit 0
   }
 
+  which git
+  [ $? -eq 1 ] && {
+    echo "missing git";
+    exit 1;
+  }
+
+  which jq
+  [ $? -eq 1 ] && {
+    echo "missing jq";
+    exit 1;
+  }
+
   for arg in "$@"; do
     case "$arg" in
       init)

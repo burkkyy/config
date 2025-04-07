@@ -1,2 +1,7 @@
 *.secert
 notes.md
+
+*.o
+st
+dwm
+dmenu

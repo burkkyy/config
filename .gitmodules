@@ -1,9 +1,0 @@
-[submodule ".suckless/dwm"]
-	path = suckless/dwm
-	url = git@github.com:burkkyy/dwm.git
-[submodule ".suckless/st"]
-	path = suckless/st
-	url = git@github.com:burkkyy/st.git
-[submodule ".suckless/dmenu"]
-	path = suckless/dmenu
-	url = git@github.com:burkkyy/dmenu.git

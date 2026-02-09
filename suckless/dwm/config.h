@@ -48,7 +48,7 @@ static const char *downbrightness[] = {"/home/caleb/.local/bin/brightness_down",
 static const char *emojimenu[] = {"/home/caleb/.local/bin/dmenuunicode", NULL};
 
 /* tagging */
-static const char *tags[] = { "", "2", "3", "4", "5", "6", "" };
+static const char *tags[] = { "0", "1", "2", "3", "4", "5" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -92,6 +92,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *print_screen_cmd[] = { "flameshot", "gui", NULL };
+static const char *google_cmd[] = { "google-chrome-stable", NULL };
 
 #include "shiftview.c"
 
@@ -121,19 +122,21 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	TAGKEYS(                        XK_1,                      0)
-	TAGKEYS(                        XK_2,                      1)
-	TAGKEYS(                        XK_3,                      2)
-	TAGKEYS(                        XK_4,                      3)
-	TAGKEYS(                        XK_5,                      4)
-	TAGKEYS(                        XK_6,                      5)
-	TAGKEYS(                        XK_7,                      6)
-	TAGKEYS(                        XK_8,                      7)
-	TAGKEYS(                        XK_9,                      8)
+	TAGKEYS(												XK_grave, 								 0)
+	TAGKEYS(                        XK_1,                      1)
+	TAGKEYS(                        XK_2,                      2)
+	TAGKEYS(                        XK_3,                      3)
+	TAGKEYS(                        XK_4,                      4)
+	TAGKEYS(                        XK_5,                      5)
+	TAGKEYS(                        XK_6,                      6)
+	TAGKEYS(                        XK_7,                      7)
+	TAGKEYS(                        XK_8,                      8)
+	TAGKEYS(                        XK_9,                      9)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	/* User defined keybinds */
 	{ MODKEY, 	XK_e,	   			            spawn, {.v = emojimenu } },
   { 0,        XK_F13,             			spawn, {.v = print_screen_cmd } },
+	{ 0,        XK_F14,             			spawn, {.v = google_cmd } },
   { 0,				XF86XK_MonBrightnessDown,	spawn, {.v = downbrightness } },
 	{ 0,				XF86XK_MonBrightnessUp,		spawn, {.v = upbrightness } },
 	{ 0,				XF86XK_AudioLowerVolume, 	spawn, {.v = downvol } },

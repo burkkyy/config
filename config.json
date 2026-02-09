@@ -64,7 +64,8 @@
       "flameshot",
       "meld",
       "visual-studio-code-bin",
-      "htop"
+      "htop",
+      "gtimelog"
     ],
     "misc": ["google-chrome", "ripgrep", "neofetch", "vlc"]
   }

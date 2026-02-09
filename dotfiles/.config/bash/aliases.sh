@@ -21,6 +21,7 @@ alias google='google-chrome-stable'
 
 # special aliases
 alias 'ff'='nvim $(fzf)'
+alias ts='date +%Y%m%d%H%M%S'
 
 # git aliases
 alias gs='git status'

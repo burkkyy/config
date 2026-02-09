@@ -24,3 +24,5 @@ export __GL_SHADER_DISK_CACHE_PATH="$CONFIG/nv"
 
 # https://direnv.net/
 eval "$(direnv hook bash)"
+
+#source ~/sdks/vulkan/1.4.313.0/setup-env.sh
